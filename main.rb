@@ -51,21 +51,23 @@ def print_drivers(driver)
 end
 
 def get_trips(file)
+  output = []
   parse_file(file).map do |new_line|
     if new_line.include?("Trip")
-      convert_trips(new_line)
+      convert_trips(new_line, output)
     end
   end
 end
 
 
-def convert_trips(trip)
+def convert_trips(trip, output)
+
   trip = trip.split(" ")
   trip_driver = trip[1]
   trip_distance = trip[4].to_i
   trip_duration = ((Time.parse(trip[3]) - Time.parse(trip[2])) / 3600)
   average_speed = (trip_distance / trip_duration).round
-  puts "#{trip_driver}: #{trip_distance} @ #{average_speed} mph."
+  output << "#{trip_driver}: #{trip_distance} @ #{average_speed} mph."
 end
 
 
