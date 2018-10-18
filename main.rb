@@ -46,34 +46,29 @@ end
 
 def print_drivers(driver)
   miles_driven = 0
-  driver.split(" ")[1..-1].join(" ")
-  return "#{driver}: #{miles_driven} miles"
+  driver  = driver.split(" ")[1..-1].join(" ")
+  return driver
 end
 
 def get_trips(file)
   parse_file(file).map do |new_line|
     if new_line.include?("Trip")
-      set_trips(new_line)
+      convert_trips(new_line)
     end
   end
 end
 
 
-def set_trips(trip)
+def convert_trips(trip)
   trip = trip.split(" ")
   trip_driver = trip[1]
   trip_distance = trip[4].to_i
   trip_duration = ((Time.parse(trip[3]) - Time.parse(trip[2])) / 3600)
   average_speed = (trip_distance / trip_duration).round
-  create_trip(trip_driver, trip_distance, trip_duration, average_speed)
+  puts "#{trip_driver}: #{trip_distance} @ #{average_speed} mph."
 end
 
-def create_trip(trip_driver, trip_distance, trip_duration, average_speed)
-  if print_drivers(trip_driver).include?(trip_driver)
-    #binding.pry
-  puts "#{trip_driver}: #{trip_distance} miles @ #{average_speed} mph"
-end
-end
+
 
 
 get_drivers("seed_data.txt")
