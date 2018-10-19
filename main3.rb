@@ -15,15 +15,18 @@ def extract_data(file)
     elsif new_line.include?("Trip")
       arr = new_line.split(" ")
       driver = arr[1]
-      get_trips(new_line)
-      binding.pry
-    #   # Trip Dan 7;18 7:25 28
-    #
-    #   output << get_trips(new_line)
-    #   output[trip_driver] << {}
+      if hash.keys.include?(driver)
+        hash[driver] << get_trips(new_line)
+      end
     end
   end
-  end
+    hash.map do |driver|
+      if driver && !driver[0].empty?
+        driver[1]
+        binding.pry
+      end
+    end
+end
 
   def get_drivers(driver)
     driver  = driver.split(" ")[1..-1].join(" ")
@@ -32,11 +35,10 @@ def extract_data(file)
 
   def get_trips(trip)
     trip = trip.split(" ")
-    trip_driver = trip[1]
     trip_distance = trip[4].to_i
     trip_duration = ((Time.parse(trip[3]) - Time.parse(trip[2])) / 3600)
     average_speed = (trip_distance / trip_duration).round
-    return "{trip_driver}: #{trip_distance} miles @ #{average_speed} mph."
+    return {distance: trip_distance, speed: average_speed}
   end
 
   extract_data("seed_data.txt")
