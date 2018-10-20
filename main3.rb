@@ -21,10 +21,13 @@ def extract_data(file)
     end
   end
     hash.map do |driver|
-      if driver && !driver[0].empty?
-        driver[1]
+        driver[1].reduce do |a, b|
+          result = {}
+          result[:distance] = a[:distance] + b[:distance]
+          result[:time] = a[:time] + b[:time]
+          binding.pry
+        end
         binding.pry
-      end
     end
 end
 
@@ -35,10 +38,14 @@ end
 
   def get_trips(trip)
     trip = trip.split(" ")
-    trip_distance = trip[4].to_i
+    trip_distance = trip[4].to_f.floor
     trip_duration = ((Time.parse(trip[3]) - Time.parse(trip[2])) / 3600)
-    average_speed = (trip_distance / trip_duration).round
-    return {distance: trip_distance, speed: average_speed}
+    average_speed = (trip_distance / trip_duration).floor
+    return {distance: trip_distance, time: trip_duration}
+  end
+
+  def average_trips(hash)
+
   end
 
   extract_data("seed_data.txt")
