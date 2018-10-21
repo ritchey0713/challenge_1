@@ -15,20 +15,10 @@ def extract_data(file)
     elsif new_line.include?("Trip")
       arr = new_line.split(" ")
       driver = arr[1]
-      if hash.keys.include?(driver)
-        hash[driver] << get_trips(new_line)
-      end
+      assign_trips(hash, driver, new_line)
     end
   end
-    hash.map do |driver|
-        driver[1].reduce do |a, b|
-          result = {}
-          result[:distance] = a[:distance] + b[:distance]
-          result[:time] = a[:time] + b[:time]
-          binding.pry
-        end
-        binding.pry
-    end
+    average_trips(hash)
 end
 
   def get_drivers(driver)
@@ -39,13 +29,28 @@ end
   def get_trips(trip)
     trip = trip.split(" ")
     trip_distance = trip[4].to_f.floor
-    trip_duration = ((Time.parse(trip[3]) - Time.parse(trip[2])) / 3600)
+    trip_duration = ((Time.parse(trip[3]) - Time.parse(trip[2])) / 3600).round(1)
     average_speed = (trip_distance / trip_duration).floor
     return {distance: trip_distance, time: trip_duration}
   end
 
-  def average_trips(hash)
+  def assign_trips(hash, driver, new_line)
+    if hash.keys.include?(driver)
+      hash[driver] << get_trips(new_line)
+    end
+  end
 
+  def average_trips(hash)
+    hash.map do |driver|
+      driver[1].inject do |a, b|
+        result = {}
+        result[:distance] = a[:distance] + b[:distance]
+        result[:time] = a[:time] + b[:time]
+        result[:speed] = (result[:distance] / result[:time])
+        driver[1] = []
+        hash[driver[0]] = result
+      end
+    end
   end
 
   extract_data("seed_data.txt")
