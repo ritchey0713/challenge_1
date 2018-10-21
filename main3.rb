@@ -31,14 +31,23 @@ def average_trips(hash)
       result[:distance] = a[:distance] + b[:distance]
       result[:time] = a[:time] + b[:time]
       result[:speed] = (result[:distance] / result[:time])
-      hash[driver[0]] = result }
+      hash[driver[0]] = [result] }
   }
 end
 
+def sort_drivers(hash)
+
+end 
+
 def print_trips(hash)
   hash.each do |driver|
-    binding.pry
+    if !driver[1].empty?
+    driver = driver.flatten
+    puts "#{driver[0]}: #{driver[1][:distance].round} miles @ #{driver[1][:speed].round} mph"
+  else
+    puts "#{driver[0]}: 0 miles"
   end
+end
 end
 
 def extract_data(file)
@@ -53,6 +62,7 @@ def extract_data(file)
     end
   }
     average_trips(hash)
+    sort_drivers(hash)
     print_trips(hash)
 end
 
