@@ -21,30 +21,29 @@ end
   end
 
 def assign_trips(hash, driver, new_line)
-  if hash.keys.include?(driver)
-    hash[driver] << get_trips(new_line)
-  end
+   hash.keys.include?(driver) ? hash[driver] << get_trips(new_line) : nil
 end
 
 def average_trips(hash)
-  hash.map do |driver|
-    driver[1].inject do |a, b|
+  hash.map { |driver|
+    driver[1].inject {|a, b|
       result = {}
       result[:distance] = a[:distance] + b[:distance]
       result[:time] = a[:time] + b[:time]
       result[:speed] = (result[:distance] / result[:time])
-      hash[driver[0]] = result
-    end
-  end
+      hash[driver[0]] = result }
+  }
 end
 
-def print_trips
-
+def print_trips(hash)
+  hash.each do |driver|
+    binding.pry
+  end
 end
 
 def extract_data(file)
   hash = {}
-  parse_file(file).map do |new_line|
+  parse_file(file).map { |new_line|
     if new_line.include?("Driver")
       hash[get_drivers(new_line)] = []
     elsif new_line.include?("Trip")
@@ -52,7 +51,7 @@ def extract_data(file)
       driver = arr[1]
       assign_trips(hash, driver, new_line)
     end
-  end
+  }
     average_trips(hash)
     print_trips(hash)
 end
