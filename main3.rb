@@ -28,10 +28,10 @@ end
 
   def get_trips(trip)
     trip = trip.split(" ")
-    trip_distance = trip[4].to_f.floor
-    trip_duration = ((Time.parse(trip[3]) - Time.parse(trip[2])) / 3600).round(1)
-    average_speed = (trip_distance / trip_duration).floor
-    return {distance: trip_distance, time: trip_duration}
+    trip_distance = trip[4].to_f
+    trip_duration = ((Time.parse(trip[3]) - Time.parse(trip[2])) / 3600)
+    average_speed = (trip_distance / trip_duration)
+    return {distance: trip_distance, time: trip_duration, speed: average_speed}
   end
 
   def assign_trips(hash, driver, new_line)
@@ -47,10 +47,13 @@ end
         result[:distance] = a[:distance] + b[:distance]
         result[:time] = a[:time] + b[:time]
         result[:speed] = (result[:distance] / result[:time])
-        driver[1] = []
         hash[driver[0]] = result
       end
     end
+  end
+
+  def print_trips
+
   end
 
   extract_data("seed_data.txt")
