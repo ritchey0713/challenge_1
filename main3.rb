@@ -33,12 +33,12 @@ def average_trips(hash)
       result[:speed] = (result[:distance] / result[:time])
       hash[driver[0]] = [result] }
   }
-  
+
 end
 
 def sort_drivers(hash)
 
-end 
+end
 
 def print_trips(hash)
   array_drivers = []
@@ -47,13 +47,17 @@ def print_trips(hash)
       driver = driver.flatten
       array_drivers << "#{driver[0]}: #{driver[1][:distance].round} miles @ #{driver[1] [:speed].round} mph"
     else
-      puts "#{driver[0]}: 0 miles"
+      array_drivers << "#{driver[0]}: 0 miles"
   end
 end
-  x = array_drivers.sort do |a, b|
-    b[/\d+/].to_i <=> a[/\d+/].to_i
-  end
-  binding.pry
+  sort_all_trips(array_drivers).each { |driver|
+    puts "#{driver}"
+  }
+end
+
+def sort_all_trips(array_drivers)
+  sorted_trips = array_drivers.sort { |a, b|
+    b[/\d+/].to_i <=> a[/\d+/].to_i }
 end
 
 def extract_data(file)
@@ -72,4 +76,3 @@ def extract_data(file)
 end
 
 extract_data("seed_data.txt")
-
