@@ -40,32 +40,32 @@
 
 ## Testing
   For testing Rspec was implemented.
-  1. set up test to require cli file__
-  2. testing #parse file__
-    2a. run a test for the passed in argument for the data type__ 
-    2b. check the return to match the expected array of strings__
-  3. test #get_driver_names 
-    3a. test argument for data type 
-    3b. test method to return only the name as a string 
-  4. test #build_trips
-    4a. test trip argument to be string, and equal the first trip 
-    4b. test return hash of trip, and calculations
-  5. test #assign_trips_to_driver 
-    5a. test data passed to be correct 
-    5b. test the driver array for trip being added 
-  6.  test #map_average_trips_for_drivers 
-    6a. test for hash argument 
-    6b. test hash to modify to array, with trips averaged
-    6c. make sure drivers with no trips equal nil 
-  7. test #output_data 
-    7a. test hash argument 
-    7b. test array for length, i.e. drivers being pushed in 
-  8. test # sort_drivers_by_distance 
-    8a. test array for type 
-    8b. test size of array 
-    8c. test first element for correct first element 
-    8d. test entire array for proper sorting 
-  9.test #parse_line 
+  1. set up test to require cli file   
+  2. testing #parse file   
+    2a. run a test for the passed in argument for the data type  
+    2b. check the return to match the expected array of strings  
+  3. test #get_driver_names   
+    3a. test argument for data type   
+    3b. test method to return only the name as a string    
+  4. test #build_trips   
+    4a. test trip argument to be string, and equal the first trip    
+    4b. test return hash of trip, and calculations   
+  5. test #assign_trips_to_driver    
+    5a. test data passed to be correct    
+    5b. test the driver array for trip being added   
+  6.  test #map_average_trips_for_drivers   
+    6a. test for hash argument   
+    6b. test hash to modify to array, with trips averaged  
+    6c. make sure drivers with no trips equal nil   
+  7. test #output_data   
+    7a. test hash argument   
+    7b. test array for length, i.e. drivers being pushed in   
+  8. test # sort_drivers_by_distance   
+    8a. test array for type   
+    8b. test size of array   
+    8c. test first element for correct first element   
+    8d. test entire array for proper sorting   
+  9.test #parse_line   
 
 
 
