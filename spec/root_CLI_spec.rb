@@ -66,6 +66,7 @@ describe '#sort_drivers_by_distance' do
   it 'takes an array of drivers' do
     array = ["Dan: 39 miles @ 47 mph", "Alex: 42 miles @ 34 mph", "Bob: 0 miles"]
     element = "Alex: 42 miles @ 34 mph"
+    expect(sort_drivers_by_distance(array).size).to be(3)
     expect(sort_drivers_by_distance(array)).to eq(["Alex: 42 miles @ 34 mph", "Dan: 39 miles @ 47 mph", "Bob: 0 miles"])
     expect(sort_drivers_by_distance(array).first).to eq(element)
   end
