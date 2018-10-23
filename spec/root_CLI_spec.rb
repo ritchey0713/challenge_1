@@ -16,6 +16,7 @@ describe "./lib/main3.rb" do
   describe '#get_driver_names' do
     it 'takes one string as an argument and returns as a name' do
       driver = 'Driver Dan'
+      expect(driver).to be_a(String)
       expect(get_driver_names(driver)).to eq("Dan")
     end
   end
@@ -23,6 +24,7 @@ describe "./lib/main3.rb" do
   describe '#build_trips' do 
     it 'takes a trip as an argument and returns a hash with, distance, time and speed' do
     trip = "Trip Dan 07:15 07:45 17.3"
+    expect(trip).to be_a(String)
     expect(build_trips(trip)).to eq({:distance=>17.3, :time=>0.5, :speed=>34.6})
   end
 end 
@@ -55,7 +57,9 @@ end
 describe '#sort_drivers_by_distance' do 
   it 'takes an array of drivers' do
     array = ["Dan: 39 miles @ 47 mph", "Alex: 42 miles @ 34 mph", "Bob: 0 miles"]
+    element = "Alex: 42 miles @ 34 mph"
     expect(sort_drivers_by_distance(array)).to eq(["Alex: 42 miles @ 34 mph", "Dan: 39 miles @ 47 mph", "Bob: 0 miles"])
+    expect(sort_drivers_by_distance(array).first).to eq(element)
   end
 end
 
