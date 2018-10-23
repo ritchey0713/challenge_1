@@ -56,16 +56,20 @@ def sort_drivers_by_distance(array_drivers)
     b[/\d+/].to_i <=> a[/\d+/].to_i }
 end
 
+def parse_line(hash, line)
+  if line.include?("Driver")
+    hash[get_driver_names(line)] = []
+  elsif line.include?("Trip")
+    arr = line.split(" ")
+    driver = arr[1]
+    assign_trips_to_driver(hash, driver, line)
+  end
+end 
+
 def extract_data_from_file(file)
   hash = {}
   parse_file(file).map { |line|
-    if line.include?("Driver")
-      hash[get_driver_names(line)] = []
-    elsif line.include?("Trip")
-      arr = line.split(" ")
-      driver = arr[1]
-      assign_trips_to_driver(hash, driver, line)
-    end
+    parse_line(hash, line)
   }
     map_average_trips_for_drivers(hash)
     output_data(hash)
