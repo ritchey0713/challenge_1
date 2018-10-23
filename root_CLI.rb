@@ -1,5 +1,5 @@
-require 'pry'
 require 'time'
+
 
 def parse_file(file)
   fileName = file.to_s
@@ -68,10 +68,11 @@ end
 
 def extract_data_from_file(file)
   hash = {}
-  parse_file(file).map { |line|
+  x = parse_file(file).map { |line|
     parse_line(hash, line)
   }
     map_average_trips_for_drivers(hash)
     output_data(hash)
 end
+
 
