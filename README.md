@@ -40,10 +40,10 @@
 
 ## Testing
   For testing Rspec was implemented.
-  1. set up test to require cli file 
-  2. testing #parse file 
-    2a. run a test for the passed in argument for the data type 
-    2b. check the return to match the expected array of strings 
+  1. set up test to require cli file__
+  2. testing #parse file__
+    2a. run a test for the passed in argument for the data type__ 
+    2b. check the return to match the expected array of strings__
   3. test #get_driver_names 
     3a. test argument for data type 
     3b. test method to return only the name as a string 
@@ -58,6 +58,14 @@
     6b. test hash to modify to array, with trips averaged
     6c. make sure drivers with no trips equal nil 
   7. test #output_data 
+    7a. test hash argument 
+    7b. test array for length, i.e. drivers being pushed in 
+  8. test # sort_drivers_by_distance 
+    8a. test array for type 
+    8b. test size of array 
+    8c. test first element for correct first element 
+    8d. test entire array for proper sorting 
+  9.test #parse_line 
 
 
 
