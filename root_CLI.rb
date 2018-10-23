@@ -31,7 +31,8 @@ def map_average_trips_for_drivers(hash)
       result[:distance] = a[:distance] + b[:distance]
       result[:time] = a[:time] + b[:time]
       result[:speed] = (result[:distance] / result[:time])
-      hash[driver[0]] = [result] }
+      hash[driver[0]] = [result]
+    }
   }
 end
 
@@ -70,4 +71,3 @@ def extract_data_from_file(file)
     output_data(hash)
 end
 
-extract_data_from_file("seed_data.txt")
