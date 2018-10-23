@@ -65,7 +65,13 @@
     8b. test size of array   
     8c. test first element for correct first element   
     8d. test entire array for proper sorting   
-  9.test #parse_line   
+  9.test #parse_line  
+    9a. test arguments for type 
+    9b. test driver for empty array value  
+  10. test #extract_data_from_file  
+    10a. test for file argument    
+    10b. test to match correct array    
+
 
 
 
