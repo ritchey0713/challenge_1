@@ -1,8 +1,9 @@
 require 'time'
-
+require 'pry'
 def parse_file(file)
   fileName = file.to_s
   lines = File.readlines(fileName)
+  binding.pry
   lines = lines.join.split("\n")
 end
 

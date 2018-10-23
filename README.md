@@ -72,8 +72,7 @@
     10a. test for file argument    
     10b. test to match correct array    
 
-
-
-
 ## Thoughts 
+I felt this problem was easily solved by using primitive types.  
 
+I decided to structure it similar to a JSON abject, where each key was a different driver and they could each have a collection of trips. By doing it this way I was able to pass the hash around and access the keys and values with built in methods such as #includes? and also allowing me to modify the data, trips quite easily as I had to deal with Dan having more than one trip, and using #inject to get my final averages. By keeping it as a hash I was also able to iterate with access to keys, and values, to grab and assign data easily. I did have to require time to parse the time and get a float, as a duration. From the start there would have many iterators involved as well was conditionals for my array values, implementing built in array/hash methods to get the data flow to the correct helper methods I've built. Using this faux JSON approach gave the ability to carry the data easily through my methods, and make it easy to use interpolation at the end, changing my data into a string, and storing them into an array to access each one to print accurately and in correct order
