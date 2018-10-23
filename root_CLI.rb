@@ -20,8 +20,8 @@ def build_trips(trip)
   return {distance: trip_distance, time: trip_duration, speed: average_speed}
 end
 
-def assign_trips_to_driver(hash, driver, new_line)
-   hash.keys.include?(driver) ? hash[driver] << build_trips(new_line) : nil
+def assign_trips_to_driver(hash, driver, trip)
+   hash.keys.include?(driver) ? hash[driver] << build_trips(trip) : nil
 end
 
 def map_average_trips_for_drivers(hash)
@@ -57,13 +57,13 @@ end
 
 def extract_data_from_file(file)
   hash = {}
-  parse_file(file).map { |new_line|
-    if new_line.include?("Driver")
-      hash[get_driver_names(new_line)] = []
-    elsif new_line.include?("Trip")
-      arr = new_line.split(" ")
+  parse_file(file).map { |line|
+    if line.include?("Driver")
+      hash[get_driver_names(line)] = []
+    elsif line.include?("Trip")
+      arr = line.split(" ")
       driver = arr[1]
-      assign_trips_to_driver(hash, driver, new_line)
+      assign_trips_to_driver(hash, driver, line)
     end
   }
     map_average_trips_for_drivers(hash)

@@ -27,6 +27,15 @@ describe "./lib/main3.rb" do
   end
 end 
 
+describe '#assign_trips_to_driver' do 
+  it 'takes three arguments, a hash, a driver, and a trip' do
+    hash = {"Dan"=>[], "Alex"=>[], "Bob"=>[]}
+    driver = "Dan"
+    trip = "Trip Dan 07:15 07:45 17.3"
+    expect(assign_trips_to_driver(hash, driver, trip)).to eq([{:distance=>17.3, :time=>0.5, :speed=>34.6}])
+end
+end 
+
 end
 
 
