@@ -69,5 +69,6 @@ def extract_data_from_file(file)
   }
     map_average_trips_for_drivers(hash)
     output_data(hash)
+    binding.pry
 end
 

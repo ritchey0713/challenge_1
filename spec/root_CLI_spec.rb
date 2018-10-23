@@ -51,6 +51,7 @@ describe '#map_average_trips_for_drivers' do
     hash = {"Dan"=>[{:distance=>17.3, :time=>0.5, :speed=>34.6}, {:distance=>21.8, :time=>0.3333333333333333, :speed=>65.4}],
     "Alex"=>[{:distance=>42.0, :time=>1.25, :speed=>33.6}],
     "Bob"=>[]}
+    expect(hash).to be_a(Hash)
     expect(map_average_trips_for_drivers(hash)).to eq( [[{:distance=>39.1, :time=>0.8333333333333333, :speed=>46.92000000000001}], {:distance=>42.0, :time=>1.25, :speed=>33.6}, nil] )
   end
 end
@@ -58,7 +59,9 @@ end
 describe '#output_data' do 
   it 'takes a hash as an arguemnt' do
     hash = {"Dan"=>[{:distance=>39.1, :time=>0.8333333333333333, :speed=>46.92000000000001}], "Alex"=>[{:distance=>42.0, :time=>1.25, :speed=>33.6}], "Bob"=>[]}
-    expect(output_data(hash)).to eq(["Alex: 42 miles @ 34 mph", "Dan: 39 miles @ 47 mph", "Bob: 0 miles"])
+    array_drivers = ["Dan: 39 miles @ 47 mph", "Alex: 42 miles @ 34 mph", "Bob: 0 miles"]
+    expect(hash).to be_a(Hash)
+    expect(array_drivers).to_not eq(0)
   end
 end
 
@@ -66,9 +69,19 @@ describe '#sort_drivers_by_distance' do
   it 'takes an array of drivers' do
     array = ["Dan: 39 miles @ 47 mph", "Alex: 42 miles @ 34 mph", "Bob: 0 miles"]
     element = "Alex: 42 miles @ 34 mph"
+    expect(array).to be_a(Array)
+    expect(element).to be_a(String)
     expect(sort_drivers_by_distance(array).size).to be(3)
     expect(sort_drivers_by_distance(array)).to eq(["Alex: 42 miles @ 34 mph", "Dan: 39 miles @ 47 mph", "Bob: 0 miles"])
     expect(sort_drivers_by_distance(array).first).to eq(element)
+  end
+end
+
+describe '#extract_data_from_file' do 
+  it 'takes a file location as an argument' do
+    file = "seed_data.txt"
+    
+    expect(extract_data_from_file(file)).to match_array(["Alex: 42 miles @ 34 mph", "Dan: 39 miles @ 47 mph", "Bob: 0 miles"])
   end
 end
 
