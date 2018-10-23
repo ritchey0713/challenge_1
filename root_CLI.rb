@@ -1,6 +1,5 @@
 require 'time'
 
-
 def parse_file(file)
   fileName = file.to_s
   lines = File.readlines(fileName)
@@ -20,25 +19,25 @@ def build_trips(trip)
   return {distance: trip_distance, time: trip_duration, speed: average_speed}
 end
 
-def assign_trips_to_driver(hash, driver, trip)
-   hash.keys.include?(driver) ? hash[driver] << build_trips(trip) : nil
+def assign_trips_to_driver(driver_hash, driver, trip)
+   driver_hash.keys.include?(driver) ? driver_hash[driver] << build_trips(trip) : nil
 end
 
-def map_average_trips_for_drivers(hash)
-  hash.map { |driver|
+def map_average_trips_for_drivers(driver_hash)
+  driver_hash.map { |driver|
     driver[1].inject {|a, b|
       result = {}
       result[:distance] = a[:distance] + b[:distance]
       result[:time] = a[:time] + b[:time]
       result[:speed] = (result[:distance] / result[:time])
-      hash[driver[0]] = [result]
+      driver_hash[driver[0]] = [result]
     }
   }
 end
 
-def output_data(hash)
+def output_data(driver_hash)
   array_drivers = []
-  hash.each do |driver|
+  driver_hash.each do |driver|
    if !driver[1].empty?
       driver = driver.flatten
       array_drivers << "#{driver[0]}: #{driver[1][:distance].round} miles @ #{driver[1] [:speed].round} mph"
@@ -56,23 +55,23 @@ def sort_drivers_by_distance(array_drivers)
     b[/\d+/].to_i <=> a[/\d+/].to_i }
 end
 
-def parse_line(hash, line)
+def parse_line(driver_hash, line)
   if line.include?("Driver")
-    hash[get_driver_names(line)] = []
+    driver_hash[get_driver_names(line)] = []
   elsif line.include?("Trip")
-    arr = line.split(" ")
-    driver = arr[1]
-    assign_trips_to_driver(hash, driver, line)
+    line_array = line.split(" ")
+    driver = line_array[1]
+    assign_trips_to_driver(driver_hash, driver, line)
   end
 end 
 
 def extract_data_from_file(file)
-  hash = {}
-  x = parse_file(file).map { |line|
-    parse_line(hash, line)
+  driver_hash = {}
+  parse_file(file).map { |line|
+    parse_line(driver_hash, line)
   }
-    map_average_trips_for_drivers(hash)
-    output_data(hash)
+  map_average_trips_for_drivers(driver_hash)
+  output_data(driver_hash)
 end
 
 
