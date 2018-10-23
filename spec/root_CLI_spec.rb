@@ -6,6 +6,7 @@ describe "./lib/main3.rb" do
       file = "seed_data.txt"
       expect(file).to be_a(String)
     end
+    
     it 'should return an array, with each line as an element' do
       file = "seed_data.txt"
       expect(parse_file(file)).to eq(["Driver Dan",
@@ -23,6 +24,7 @@ describe "./lib/main3.rb" do
       driver = 'Driver Dan'
       expect(driver).to be_a(String)
     end 
+    
     it 'should return the name of the Driver only' do
     driver = 'Driver Dan'
       expect(get_driver_names(driver)).to eq("Dan")
@@ -30,10 +32,13 @@ describe "./lib/main3.rb" do
   end
   
   describe '#build_trips' do 
-    it 'takes a trip as an argument and returns a hash with, distance, time and speed' do
-    trip = "Trip Dan 07:15 07:45 17.3"
-    expect(trip).to be_a(String)
-    expect(trip).to eq("Trip Dan 07:15 07:45 17.3")
+    it 'takes a trip as an argument' do
+      trip = "Trip Dan 07:15 07:45 17.3"
+      expect(trip).to be_a(String)
+      expect(trip).to eq("Trip Dan 07:15 07:45 17.3")
+    end 
+    it 'puts the string into a hash with keys of distance, duration, and average speed' do 
+      trip = "Trip Dan 07:15 07:45 17.3"
     expect(build_trips(trip)).to eq({:distance=>17.3, :time=>0.5, :speed=>34.6})
   end
 end 
