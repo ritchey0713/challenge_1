@@ -80,7 +80,6 @@ end
 describe '#extract_data_from_file' do 
   it 'takes a file location as an argument' do
     file = "seed_data.txt"
-    
     expect(extract_data_from_file(file)).to match_array(["Alex: 42 miles @ 34 mph", "Dan: 39 miles @ 47 mph", "Bob: 0 miles"])
   end
 end
