@@ -19,22 +19,35 @@ describe "./lib/main3.rb" do
       expect(get_driver_names(driver)).to eq("Dan")
     end
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+  describe '#build_trips' do 
+    it 'takes a trip as an argument and returns a hash with, distance, time and speed' do
+    trip = "Trip Dan 07:15 07:45 17.3"
+    expect(build_trips(trip)).to eq({:distance=>17.3, :time=>0.5, :speed=>34.6})
+  end
+end 
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
